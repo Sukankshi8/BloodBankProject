@@ -26,6 +26,41 @@ $result = mysqli_query($conn, $sql);
     max-width: 450px;
     background-color: white;
 }
+/* Set table properties */
+table {
+  border-collapse: collapse;
+  border:1px solid black;
+  color:black;
+  width: 100%;
+  border-radius: 5px;
+  -moz-border-radius: 5px !important;
+  
+}
+
+/* Style table headers */
+th {
+  background-color:  #49c5b6;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  width:10%;
+  margin-bottom: 10px;
+}
+
+/* Style table rows */
+tr {
+  border: 1px solid #ddd;
+  width:10%;
+}
+
+/* Add hover effect on table rows */
+tr:hover {
+  background-color: #D14836;
+  color:white;
+  transform: scale(1.01);
+
+
+}
 </style>
 
 <body>
@@ -53,10 +88,11 @@ $result = mysqli_query($conn, $sql);
            </form>
         </div>
 
-        <table class="table table-responsive table-striped rounded mb-5">
-            <tr><th colspan="7" class="title">Donoting Blood Samples</th></tr>
+        <!-- <table class="table table-responsive table-striped rounded mb-5"> -->
+        <table bgcolor="#2779a7">    
+        <tr><th colspan="7" class="title">Donoting Blood Samples</th></tr>
             <tr>
-                <th>#</th>
+                <th>sr.No.</th>
                 <th>Donor Name</th>
                 <th>Donor City</th>
                 <th>Donor Email</th>
