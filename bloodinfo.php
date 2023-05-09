@@ -24,6 +24,41 @@
     max-width: 450px;
     background-color: white;
 }
+/* Set table properties */
+table {
+  border-collapse: collapse;
+  border:1px solid black;
+  color:black;
+  width: 100%;
+  border-radius: 5px;
+  -moz-border-radius: 5px !important;
+  
+}
+
+/* Style table headers */
+th {
+  background-color:  #49c5b6;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  width:10%;
+  margin-bottom: 10px;
+}
+
+/* Style table rows */
+tr {
+  border: 1px solid #ddd;
+  width:10%;
+}
+
+/* Add hover effect on table rows */
+tr:hover {
+  background-color: #D14836;
+  color:white;
+  transform: scale(1.01);
+
+
+}
 </style>
 <body>
   <?php require 'header.php'; ?>
@@ -78,10 +113,11 @@
   }
   ?>
     <div class="col-lg-4 col-md-5 col-sm-6 col-xs-7 mb-5">
-          <table class="table table-striped table-responsive">
-            <th colspan="4" class="title">Blood Bank</th>
+          <!-- <table class="table table-striped table-responsive"> -->
+          <table bgcolor="#2779a7">  
+          <th colspan="4" class="title">Blood Bank</th>
             <tr>
-              <th>#</th>
+              <th>Sr.No.</th>
 
               <th>Blood Samples</th>
               <th>Action</th>
