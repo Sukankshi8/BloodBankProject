@@ -8,8 +8,22 @@
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
 
         <?php if (isset($_SESSION['hid'])) { ?>
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link btn btn-light" href="logout.php">Logout</a>
+            </li>
+            
+
+        </ul>
 
         <?php } elseif (isset($_SESSION['rid'])) { ?>
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link btn btn-light" href="logout.php">Logout</a>
+            </li>
+            
+
+        </ul>
 
         <?php }  else { ?>
                     <ul class="navbar-nav ml-auto">

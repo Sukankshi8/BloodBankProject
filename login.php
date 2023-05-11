@@ -74,7 +74,7 @@ if (isset($_SESSION['hid'])) {
 </div>
 </div>
 </div>
-<?php require 'footer.php' ?>
+
 </body>
 </html>
 <?php } ?>

@@ -146,6 +146,6 @@ tr:hover {
         alert("Hospital user can't request for blood.");
     });
 </script>
-    <?php require 'footer.php' ?>
+    
 </body>
 </html>

@@ -119,7 +119,7 @@ tr:hover {
 		<?php } ?>
 	</table>
 </div>
-    <?php require 'footer.php'; ?>
+    
 </body>
 </html>
 <?php } ?>
