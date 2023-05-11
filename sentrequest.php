@@ -72,7 +72,9 @@ tr:hover {
 <!-- 
 	<table class="table table-responsive table-striped rounded mb-5"> -->
 	<table bgcolor="#2779a7">	
-	<tr><th colspan="8" class="title">Sent requests</th></tr>
+
+	<tr><th colspan="10" class="title">Sent requests</th></tr>
+
 		<tr>
 			<th>Sr.NO.</th>
 			<th>Name</th>
@@ -80,6 +82,8 @@ tr:hover {
 			<th>City</th>
 			<th>Phone</th>
 			<th>Blood Group</th>
+      <th>Blood stock</th>
+      <th>Blood availability</th>                      
 			<th>Status</th>
 			<th>Action</th>
 		</tr>
@@ -103,6 +107,8 @@ tr:hover {
 			<td><?php echo $row['hcity'];?></td>
 			<td><?php echo $row['hphone'];?></td>
 			<td><?php echo $row['bg'];?></td>
+      <td><?php echo $row['stock']; ?></td>
+      <td><?php echo $row['doa']; ?></td>      
 			<td><?php echo $row['status'];?></td>
 			<td><?php if($row['status'] == 'Accepted'){ ?>
 			<?php }

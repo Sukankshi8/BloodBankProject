@@ -69,7 +69,7 @@ tr:hover {
         
         <?php require 'message.php'; ?>
         
-        <div class="row col-lg-8 col-md-8 col-sm-12 mb-3">
+        <div class="row col-lg-8 col-md-8 col-sm-12 mb-3" style="float:left;">
             <form method="get" action="" style="margin-top:-20px; ">
             <label class="font-weight-bolder">Select Blood Group:</label>
                <select name="search" class="form-control">
@@ -90,7 +90,8 @@ tr:hover {
 
         <!-- <table class="table table-responsive table-striped rounded mb-5"> -->
         <table bgcolor="#2779a7">    
-        <tr><th colspan="7" class="title">Available Blood Samples</th></tr>
+        <tr><th colspan="9" class="title">Available Blood Samples</th></tr>
+
             <tr>
                 <th>Sr.No.</th>
                 <th>Hospital Name</th>
@@ -98,6 +99,8 @@ tr:hover {
                 <th>Hospital Email</th>
                 <th>Hospital Phone</th>
                 <th>Blood Group</th>
+                <th>Blood stock</th>
+                <th>Blood availability</th>                
                 <th>Action</th>
             </tr>
 
@@ -110,7 +113,7 @@ tr:hover {
             }
             ?>
             </div>
-
+ 
         <?php while($row = mysqli_fetch_array($result)) { ?>
 
             <tr>
@@ -120,15 +123,21 @@ tr:hover {
                 <td><?php echo ($row['hemail']); ?></td>
                 <td><?php echo ($row['hphone']); ?></td>
                 <td><?php echo ($row['bg']); ?></td>
-
+                <td><?php echo $row['stock']; ?></td>
+                <td><?php echo $row['doa']; ?></td>
                 <?php $bid= $row['bid'];?>
                 <?php $hid= $row['hid'];?>
-                <?php $bg= $row['bg'];?>
+                <?php $bg= $row['bg'];?>                
+                <?php $num= $row['stock'];?>                
+                <?php $date= $row['doa'];?>                 
                 <form action="file/request.php" method="post">
                     <input type="hidden" name="bid" value="<?php echo $bid; ?>">
                     <input type="hidden" name="hid" value="<?php echo $hid; ?>">
                     <input type="hidden" name="bg" value="<?php echo $bg; ?>">
-
+                    <input type="hidden" name="num" value="<?php echo $num; ?>">
+                    <input type="hidden" name="date" value="<?php echo $date; ?>">
+              
+                    
                 <?php if (isset($_SESSION['hid'])) { ?>
                 <td><a href="javascript:void(0);" class="btn btn-info hospital">Request Sample</a></td>
                 <?php } else {(isset($_SESSION['rid']))  ?>
@@ -138,7 +147,9 @@ tr:hover {
                 </form>
             </tr>
 
-        <?php } ?>
+        <?php }
+         ?>
+
         </table>
     </div>
     

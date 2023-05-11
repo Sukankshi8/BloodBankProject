@@ -81,7 +81,8 @@ tr:hover {
 
 	<!-- <table class="table table-responsive table-striped rounded mb-5"> -->
 	<table bgcolor="#2779a7">	
-	<tr><th colspan="9" class="title">Blood Donate</th></tr>
+
+	<tr><th colspan="11" class="title">Blood Donate</th></tr>
 		<tr>
 			<th>Sr.No.</th>
 			<th>Name</th>
@@ -89,6 +90,8 @@ tr:hover {
 			<th>City</th>
 			<th>Phone</th>
 			<th>Blood Group</th>
+      <th>Blood stock</th>
+      <th>Blood availability</th> 
 			<th>Status</th>
 			<th colspan="2">Action</th>
 		</tr>
@@ -112,13 +115,27 @@ tr:hover {
 			<td><?php echo $row['hcity'];?></td>
 			<td><?php echo $row['hphone'];?></td>
 			<td><?php echo $row['bg'];?></td>
+      <td><?php echo $row['stock']; ?></td>
+      <td><?php echo $row['doa']; ?></td>   
+      <?php $flag_accept=0;?>   
 <td><?php echo 'You have '.$row['status'];?></td>
-			<td><?php if($row['status'] == 'Accepted'){ ?> <a href="" class="btn btn-success disabled">Accepted</a> <?php }
+			<td><?php if($row['status'] == 'Accepted'){ 
+        $flag_accept=1;
+        $hid1=$row['hid'];
+        $rid1=$row['rid'];
+        $bg1=$row['bg'];
+        $stock1=$row['stock'];
+        $doa1=$row['doa'];
+        
+        $result2=mysqli_query($conn,"  DELETE FROM `blooddinfo` WHERE `rid` ='$rid1'AND `bg`='$bg1' AND `stock` ='$stock1' AND `doa` LIKE '$doa1' ");
+        $result3=mysqli_query($conn,"INSERT INTO `bloodinfo` (`hid`, `bg`, `stock`, `doa`) VALUES ('$hid1', '$bg1', '$stock1', '$doa1');");
+        ?> <a href="" class="btn btn-success disabled">Accepted</a> <?php }
 			else{ ?>
 				<a href="file/acceptd.php?donoid=<?php echo $row['donoid'];?>" class="btn btn-success">Accept</a>
 			<?php } ?>
 			</td>
 			<td><?php if($row['status'] == 'Rejected'){ ?> <a href="" class="btn btn-danger disabled">Rejected</a> <?php }
+      elseif($flag_accept==1){ ?> <a href="" class="btn btn-danger disabled">Reject</a> <?php }
 			else{ ?>
 				<a href="file/rejectd.php?donoid=<?php echo $row['donoid'];?>" class="btn btn-danger">Reject</a>
 			<?php } ?>

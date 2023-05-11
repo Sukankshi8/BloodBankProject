@@ -72,7 +72,9 @@ tr:hover {
 
 	<!-- <table class="table table-responsive table-striped rounded mb-5"> -->
 	<table bgcolor="#2779a7">	
-	<tr><th colspan="9" class="title">Blood requests</th></tr>
+
+	<tr><th colspan="11" class="title">Blood requests</th></tr>
+
 		<tr>
 			<th>Sr.NO.</th>
 			<th>Name</th>
@@ -80,6 +82,8 @@ tr:hover {
 			<th>City</th>
 			<th>Phone</th>
 			<th>Blood Group</th>
+      <th>Blood stock</th>
+      <th>Blood availability</th>       
 			<th>Status</th>
 			<th colspan="2">Action</th>
 		</tr>
@@ -103,20 +107,32 @@ tr:hover {
 			<td><?php echo $row['rcity'];?></td>
 			<td><?php echo $row['rphone'];?></td>
 			<td><?php echo $row['bg'];?></td>
+      <td><?php echo $row['stock']; ?></td>
+      <td><?php echo $row['doa']; ?></td>      
 			<td><?php echo 'You have '.$row['status'];?></td>
-			<td><?php if($row['status'] == 'Accepted'){ ?> <a href="" class="btn btn-success disabled">Accepted</a> <?php }
+      <?php $flag_accept=0;?>
+			<td><?php if($row['status'] == 'Accepted'){ $flag_accept=1;
+            $hid1=$row['hid'];
+            $bg1=$row['bg'];
+            $stock1=$row['stock'];
+            $doa1=$row['doa'];
+        $result2=mysqli_query($conn,"  DELETE FROM `bloodinfo` WHERE `hid` ='$hid1'AND `bg`='$bg1' AND `stock` ='$stock1' AND `doa` LIKE '$doa1' ");
+        ?> <a href="" class="btn btn-success disabled">Accepted</a>
+        
+      <?php }
 			else{ ?>
 				<a href="file/accept.php?reqid=<?php echo $row['reqid'];?>" class="btn btn-success">Accept</a>
 			<?php } ?>
 			</td>
 			<td><?php if($row['status'] == 'Rejected'){ ?> <a href="" class="btn btn-danger disabled">Rejected</a> <?php }
+		        elseif($flag_accept==1){ ?> <a href="" class="btn btn-danger disabled">Reject</a> <?php }
 			else{ ?>
 				<a href="file/reject.php?reqid=<?php echo $row['reqid'];?>" class="btn btn-danger">Reject</a>
 			<?php } ?>
 			</td>
 			
 		</tr>
-		<?php } ?>
+		<?php }?>
 	</table>
 </div>
     
