@@ -10,14 +10,18 @@ if (isset($_SESSION['hid'])) {
 <html>
 <head>
   <style>
-    body{
-    background: url(image/RBC11.jpg) no-repeat center;
-    background-size: cover;
-    min-height: 0;
-    height: 650px;
-  }
+    .container-cont {
+    background:url(jastimage/BB18.jpg) no-repeat center center/cover;
+    background-size:cover;
+    position:absolute;
+    width:100%;
+    height: 100%;
+    overflow-y:hidden;
+    
+    }
 .login-form{
     width: calc(100% - 20px);
+    
     max-height: 650px;
     max-width: 450px;
     background-color: white;
@@ -29,11 +33,11 @@ if (isset($_SESSION['hid'])) {
 <body>
   <?php require 'header.php'; ?>
 
-    <div class="container cont">
+    <div class="container-cont">
       
       <?php require 'message.php'; ?>
 
-      <div class="row justify-content-center">
+      <div class="row justify-content-center" style="margin-top:100px;">
         <div class="col-lg-4 col-md-5 col-sm-6 col-xs-7 mb-5">
 
           <div class="card rounded">
