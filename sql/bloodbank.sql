@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2020 at 08:47 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: May 11, 2023 at 04:29 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,28 +30,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `blooddinfo` (
   `bdid` int(11) NOT NULL,
   `rid` int(11) NOT NULL,
-  `bg` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `blooddinfo`
---
-
-INSERT INTO `blooddinfo` (`bdid`, `rid`, `bg`) VALUES
-(10, 1, 'A+'),
-(11, 1, 'B-'),
-(12, 4, 'B+'),
-(13, 4, 'O+'),
-(14, 5, 'B+'),
-(15, 5, 'B-'),
-(16, 5, 'O+'),
-(17, 6, 'B+'),
-(18, 6, 'AB+'),
-(19, 6, 'A-'),
-(20, 7, 'AB-'),
-(21, 7, 'A-'),
-(22, 7, 'O-'),
-(23, 1, 'A-');
+  `bg` varchar(10) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `doa` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -64,8 +46,10 @@ CREATE TABLE `blooddonate` (
   `rid` int(11) NOT NULL,
   `hid` int(11) NOT NULL,
   `bg` varchar(11) NOT NULL,
-  `status` varchar(100) NOT NULL DEFAULT 'Pending'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` varchar(100) NOT NULL DEFAULT 'Pending',
+  `stock` int(11) NOT NULL,
+  `doa` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -76,31 +60,10 @@ CREATE TABLE `blooddonate` (
 CREATE TABLE `bloodinfo` (
   `bid` int(11) NOT NULL,
   `hid` int(11) NOT NULL,
-  `bg` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `bloodinfo`
---
-
-INSERT INTO `bloodinfo` (`bid`, `hid`, `bg`) VALUES
-(7, 1, 'A-'),
-(8, 1, 'O+'),
-(12, 4, 'A-'),
-(13, 4, 'A+'),
-(14, 4, 'AB+'),
-(16, 5, 'A+'),
-(17, 5, 'B-'),
-(18, 5, 'O-'),
-(20, 5, 'B+'),
-(21, 6, 'O+'),
-(22, 6, 'A-'),
-(23, 6, 'O-'),
-(24, 7, 'A-'),
-(25, 7, 'A+'),
-(26, 7, 'B-'),
-(27, 7, 'B+'),
-(31, 1, 'B-');
+  `bg` varchar(10) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `doa` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -113,8 +76,10 @@ CREATE TABLE `bloodrequest` (
   `hid` int(11) NOT NULL,
   `rid` int(11) NOT NULL,
   `bg` varchar(11) NOT NULL,
-  `status` varchar(100) NOT NULL DEFAULT 'Pending'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` varchar(100) NOT NULL DEFAULT 'Pending',
+  `stock` int(11) NOT NULL,
+  `doa` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -129,7 +94,7 @@ CREATE TABLE `hospitals` (
   `hpassword` varchar(100) NOT NULL,
   `hphone` varchar(100) NOT NULL,
   `hcity` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `hospitals`
@@ -156,7 +121,7 @@ CREATE TABLE `receivers` (
   `rphone` varchar(100) NOT NULL,
   `rbg` varchar(10) NOT NULL,
   `rcity` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `receivers`
@@ -167,7 +132,8 @@ INSERT INTO `receivers` (`id`, `rname`, `remail`, `rpassword`, `rphone`, `rbg`, 
 (4, 'Chandana', 'xyz@gmail.com', 'xyz@47', '9902477355', 'B+', 'Ballari'),
 (5, 'Rithish', 'abcd@gmail.com', 'rithish', '9380073433', 'B+', 'Tirupathi'),
 (6, 'Akshay', 'klmn@gmail.com', 'akshay74', '8106298053', 'B+', 'Hyderabad'),
-(7, 'Nandhini', 'nandhu@gmail.com', 'nandhu989', '9849492206', 'AB-', 'Bengaluru');
+(7, 'Nandhini', 'nandhu@gmail.com', 'nandhu989', '9849492206', 'AB-', 'Bengaluru'),
+(8, 'ashu shah', 'ashushah2032@gmail.com', '12345678', '7398034267', 'B+', 'shaktinagar');
 
 --
 -- Indexes for dumped tables
@@ -221,25 +187,25 @@ ALTER TABLE `receivers`
 -- AUTO_INCREMENT for table `blooddinfo`
 --
 ALTER TABLE `blooddinfo`
-  MODIFY `bdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `bdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `blooddonate`
 --
 ALTER TABLE `blooddonate`
-  MODIFY `donoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `donoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `bloodinfo`
 --
 ALTER TABLE `bloodinfo`
-  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `bloodrequest`
 --
 ALTER TABLE `bloodrequest`
-  MODIFY `reqid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `reqid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `hospitals`
@@ -251,7 +217,7 @@ ALTER TABLE `hospitals`
 -- AUTO_INCREMENT for table `receivers`
 --
 ALTER TABLE `receivers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

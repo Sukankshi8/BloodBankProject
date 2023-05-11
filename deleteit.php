@@ -90,7 +90,9 @@ tr:hover {
 
         <!-- <table class="table table-responsive table-striped rounded mb-5"> -->
         <table bgcolor="#2779a7">    
-        <tr><th colspan="7" class="title">Donoting Blood Samples</th></tr>
+
+        <tr><th colspan="9" class="title">Donoting Blood Samples</th></tr>
+
             <tr>
                 <th>sr.No.</th>
                 <th>Donor Name</th>
@@ -98,6 +100,8 @@ tr:hover {
                 <th>Donor Email</th>
                 <th>Donor Phone</th>
                 <th>Donor Group</th>
+                <th>Blood stock</th>
+                <th>Blood availability</th>                 
                 <th>Action</th>
             </tr>
 
@@ -120,15 +124,19 @@ tr:hover {
                 <td><?php echo ($row['remail']); ?></td>
                 <td><?php echo ($row['rphone']); ?></td>
                 <td><?php echo ($row['bg']); ?></td>
-
+                <td><?php echo $row['stock']; ?></td>
+                <td><?php echo $row['doa']; ?></td>
                 <?php $bdid= $row['bdid'];?>
                 <?php $rid= $row['rid'];?>
-                <?php $bg= $row['bg'];?>
+                <?php $bg= $row['bg'];?>               
+                <?php $num= $row['stock'];?>                
+                <?php $date= $row['doa'];?>   
                 <form action="file/requestd.php" method="post">
                     <input type="hidden" name="bdid" value="<?php echo $bdid; ?>">
                     <input type="hidden" name="rid" value="<?php echo $rid; ?>">
                     <input type="hidden" name="bg" value="<?php echo $bg; ?>">
-
+                    <input type="hidden" name="num" value="<?php echo $num; ?>">
+                    <input type="hidden" name="date" value="<?php echo $date; ?>">
                 <?php if (isset($_SESSION['rid'])) { ?>
                 <td><a href="javascript:void(0);" class="btn btn-info hospital">Request to donate Sample</a></td>
                 <?php } else {(isset($_SESSION['hid']))  ?>
