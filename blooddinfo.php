@@ -124,12 +124,14 @@ tr:hover {
     <div class="col-lg-4 col-md-5 col-sm-6 col-xs-7 mb-5">
           <!-- <table class="table table-striped table-responsive"> -->
           <table bgcolor="#2779a7">
+
             <th colspan="6" class="title">User</th>
             <tr>
               <th>Sr.No.</th>
               <th>Blood Group</th>
               <th>Blood stock</th>
               <th>Blood availability</th>               
+
               <th>Action</th>
             </tr>
             <div>

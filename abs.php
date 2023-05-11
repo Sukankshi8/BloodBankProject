@@ -87,9 +87,11 @@ tr:hover {
                <input type="submit" name="submit" class="btn btn-info" value="search">
            </form>
         </div>
+
         <!-- <table class="table table-responsive table-striped rounded mb-5"> -->
         <table bgcolor="#2779a7">    
         <tr><th colspan="9" class="title">Available Blood Samples</th></tr>
+
             <tr>
                 <th>Sr.No.</th>
                 <th>Hospital Name</th>

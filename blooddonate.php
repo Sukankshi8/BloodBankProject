@@ -81,6 +81,7 @@ tr:hover {
 
 	<!-- <table class="table table-responsive table-striped rounded mb-5"> -->
 	<table bgcolor="#2779a7">	
+
 	<tr><th colspan="11" class="title">Blood Donate</th></tr>
 		<tr>
 			<th>Sr.No.</th>

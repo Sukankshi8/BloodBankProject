@@ -90,7 +90,9 @@ tr:hover {
 
         <!-- <table class="table table-responsive table-striped rounded mb-5"> -->
         <table bgcolor="#2779a7">    
+
         <tr><th colspan="9" class="title">Donoting Blood Samples</th></tr>
+
             <tr>
                 <th>sr.No.</th>
                 <th>Donor Name</th>
