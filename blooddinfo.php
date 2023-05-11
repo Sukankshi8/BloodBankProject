@@ -24,6 +24,41 @@
     max-width: 450px;
     background-color: white;
 }
+/* Set table properties */
+table {
+  border-collapse: collapse;
+  border:1px solid black;
+  color:black;
+  width: 100%;
+  border-radius: 5px;
+  -moz-border-radius: 5px !important;
+  
+}
+
+/* Style table headers */
+th {
+  background-color:  #49c5b6;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  width:10%;
+  margin-bottom: 10px;
+}
+
+/* Style table rows */
+tr {
+  border: 1px solid #ddd;
+  width:10%;
+}
+
+/* Add hover effect on table rows */
+tr:hover {
+  background-color: #D14836;
+  color:white;
+  transform: scale(1.01);
+
+
+}
 </style>
 <body>
   <?php require 'header.php'; ?>
@@ -39,18 +74,13 @@
             <div class="card-header title">Add blood group available in your known community</div>
         <div class="card-body">
         <form action="file/infoAddd.php" method="post">
-          <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" title="click to see">Term & conditions. </a><br>
-          <div class="collapse" id="collapseExample">
-          If you or your Friends/Family have the mentioned(below) blood then only add Blood group(No spam).So,that the hospital can contact you with your given details if they are in need of you or your friends/family blood.You should have a blood sample tested by your doctor’s, nurse, or trained phlebotomist , at a pathology collection centre, clinic or hospital. Blood samples are most commonly taken from the inside of the elbow where the veins are usually closer to the surface.Make sure you have been eating healthy diet(No Smoking/Drinking)atleast for a week before you have to decided to donate Blood.By clicking tick mark you are promising that you are promising that you have read and accepted the above instructions and also willing to donate blood volunteerly.<br><br>
-        </div>
-
-        <input type="checkbox" name="condition" value="agree" required> Agree<br><br>
+   
         <label>Weight (in Kgs):</label>
-          <input type="number" name="num" min="0" max="700">
+          <input type="number" name="wt" min="0" max="700">
           <br>
           
-        <label>Height (in cms):</label>
-          <input type="number" name="num" min="0" max="700">  
+        <label>Age (in yr):</label>
+          <input type="number" name="age" min="0" max="700">  
           <br>
           <div style="display:flex; align-items:center; gap: 20px;">
           <label>Blood type:</label>
@@ -71,7 +101,13 @@
           <input type="number" name="num" min="0" max="700">
           <br>
           <label>Date of availability:</label>
-          <input type="date" id="Test_DatetimeLocal"><br><br>
+          <input type="date" name="date" id="Test_DatetimeLocal"><br><br>
+          <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" title="click to see">Term & conditions. </a><br>
+          <div class="collapse" id="collapseExample">
+          If you or your Friends/Family have the mentioned(below) blood then only add Blood group(No spam).So,that the hospital can contact you with your given details if they are in need of you or your friends/family blood.You should have a blood sample tested by your doctor’s, nurse, or trained phlebotomist , at a pathology collection centre, clinic or hospital. Blood samples are most commonly taken from the inside of the elbow where the veins are usually closer to the surface.Make sure you have been eating healthy diet(No Smoking/Drinking)atleast for a week before you have to decided to donate Blood.By clicking tick mark you are promising that you are promising that you have read and accepted the above instructions and also willing to donate blood volunteerly.<br><br>
+        </div>
+
+        <input type="checkbox" name="condition" value="agree" required> Agree<br><br>          
           <input type="submit" name="add" value="Add" class="btn btn-primary btn-block"><br>
           <a href="Userpage.html" class="float-right" title="click here">Cancel</a>
         </form>
@@ -86,12 +122,14 @@
   }
   ?>
     <div class="col-lg-4 col-md-5 col-sm-6 col-xs-7 mb-5">
-          <table class="table table-striped table-responsive">
-            <th colspan="4" class="title">User</th>
+          <!-- <table class="table table-striped table-responsive"> -->
+          <table bgcolor="#2779a7">
+            <th colspan="6" class="title">User</th>
             <tr>
-              <th>#</th>
-
-              <th>User</th>
+              <th>Sr.No.</th>
+              <th>Blood Group</th>
+              <th>Blood stock</th>
+              <th>Blood availability</th>               
               <th>Action</th>
             </tr>
             <div>
@@ -106,8 +144,9 @@
             <?php while($row = mysqli_fetch_array($result)) { ?>
             <tr>
               <td><?php echo ++$counter; ?></td>
-
               <td><?php echo $row['bg'];?></td>
+              <td><?php echo $row['stock']; ?></td>
+              <td><?php echo $row['doa']; ?></td>
               <td><a href="file/deleted.php?bdid=<?php echo $row['bdid'];?>" class="btn btn-danger">Delete</a></td>
             </tr>
             <?php } ?>

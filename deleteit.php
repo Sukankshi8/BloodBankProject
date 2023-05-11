@@ -26,6 +26,41 @@ $result = mysqli_query($conn, $sql);
     max-width: 450px;
     background-color: white;
 }
+/* Set table properties */
+table {
+  border-collapse: collapse;
+  border:1px solid black;
+  color:black;
+  width: 100%;
+  border-radius: 5px;
+  -moz-border-radius: 5px !important;
+  
+}
+
+/* Style table headers */
+th {
+  background-color:  #49c5b6;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  width:10%;
+  margin-bottom: 10px;
+}
+
+/* Style table rows */
+tr {
+  border: 1px solid #ddd;
+  width:10%;
+}
+
+/* Add hover effect on table rows */
+tr:hover {
+  background-color: #D14836;
+  color:white;
+  transform: scale(1.01);
+
+
+}
 </style>
 
 <body>
@@ -53,15 +88,18 @@ $result = mysqli_query($conn, $sql);
            </form>
         </div>
 
-        <table class="table table-responsive table-striped rounded mb-5">
-            <tr><th colspan="7" class="title">Donoting Blood Samples</th></tr>
+        <!-- <table class="table table-responsive table-striped rounded mb-5"> -->
+        <table bgcolor="#2779a7">    
+        <tr><th colspan="9" class="title">Donoting Blood Samples</th></tr>
             <tr>
-                <th>#</th>
+                <th>sr.No.</th>
                 <th>Donor Name</th>
                 <th>Donor City</th>
                 <th>Donor Email</th>
                 <th>Donor Phone</th>
                 <th>Donor Group</th>
+                <th>Blood stock</th>
+                <th>Blood availability</th>                 
                 <th>Action</th>
             </tr>
 
@@ -84,15 +122,19 @@ $result = mysqli_query($conn, $sql);
                 <td><?php echo ($row['remail']); ?></td>
                 <td><?php echo ($row['rphone']); ?></td>
                 <td><?php echo ($row['bg']); ?></td>
-
+                <td><?php echo $row['stock']; ?></td>
+                <td><?php echo $row['doa']; ?></td>
                 <?php $bdid= $row['bdid'];?>
                 <?php $rid= $row['rid'];?>
-                <?php $bg= $row['bg'];?>
+                <?php $bg= $row['bg'];?>               
+                <?php $num= $row['stock'];?>                
+                <?php $date= $row['doa'];?>   
                 <form action="file/requestd.php" method="post">
                     <input type="hidden" name="bdid" value="<?php echo $bdid; ?>">
                     <input type="hidden" name="rid" value="<?php echo $rid; ?>">
                     <input type="hidden" name="bg" value="<?php echo $bg; ?>">
-
+                    <input type="hidden" name="num" value="<?php echo $num; ?>">
+                    <input type="hidden" name="date" value="<?php echo $date; ?>">
                 <?php if (isset($_SESSION['rid'])) { ?>
                 <td><a href="javascript:void(0);" class="btn btn-info hospital">Request to donate Sample</a></td>
                 <?php } else {(isset($_SESSION['hid']))  ?>

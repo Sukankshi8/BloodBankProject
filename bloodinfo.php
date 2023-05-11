@@ -24,6 +24,41 @@
     max-width: 450px;
     background-color: white;
 }
+/* Set table properties */
+table {
+  border-collapse: collapse;
+  border:1px solid black;
+  color:black;
+  width: 100%;
+  border-radius: 5px;
+  -moz-border-radius: 5px !important;
+  
+}
+
+/* Style table headers */
+th {
+  background-color:  #49c5b6;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  width:10%;
+  margin-bottom: 10px;
+}
+
+/* Style table rows */
+tr {
+  border: 1px solid #ddd;
+  width:10%;
+}
+
+/* Add hover effect on table rows */
+tr:hover {
+  background-color: #D14836;
+  color:white;
+  transform: scale(1.01);
+
+
+}
 </style>
 <body>
   <?php require 'header.php'; ?>
@@ -39,14 +74,10 @@
             <div class="card-header title">Add blood group available in your hospital</div>
         <div class="card-body">
         <form action="file/infoAdd.php" method="post">
-          <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" title="click to see">Term & conditions. </a><br>
-          <div class="collapse" id="collapseExample">
-          If you have a blood sample tested by  your doctor’s, nurse, or trained phlebotomist , at a pathology collection centre, clinic or hospital. Blood samples are most commonly taken from the inside of the elbow where the veins are usually closer to the surface. If before the needle is inserted, the area had been cleaned with an antiseptic cloth and blood sample is transferred into tubes containing the correct preservatives then add your blood group available in your hospital to your blood bank.<br><br>
-        </div>
-          <input type="checkbox" name="condition" value="agree" required> Agree<br><br>
+
           <div style="display:flex; align-items:center; gap: 20px;">
-          <label>Blood type:</label>
-          <select class="form-control" name="bg" required="" style="width: 25%;">
+          <label>Blood Group (Type):&nbsp&nbsp&nbsp</label>
+          <select name="bg" required="" style="width: 25% ;height: 30px;">
                 
                 <option>A-</option>
                 <option>A+</option>
@@ -58,12 +89,19 @@
                 <option>O+</option>
           </select>
           </div>
-          <br>
-          <label>Units of blood:</label>
-          <input type="number" name="num" min="0" max="700">
-          <br>
-          <label>Date of availability:</label>
-          <input type="date" id="Test_DatetimeLocal"><br><br>
+        
+          <div style="display:flex; align-items:left;gap: 20px; ">
+          <label>Units of blood available:</label>
+          <input type="number" name="num" min="0" max="700" style="width: 24%; height: 30px">
+          </div>          
+   
+          <label>Date of availability :</label>
+          <input type="date" name="date" id="Test_DatetimeLocal"><br>
+          <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" title="click to see">Term & conditions. </a><br>
+          <div class="collapse" id="collapseExample">
+          If you have a blood sample tested by  your doctor’s, nurse, or trained phlebotomist , at a pathology collection centre, clinic or hospital. Blood samples are most commonly taken from the inside of the elbow where the veins are usually closer to the surface. If before the needle is inserted, the area had been cleaned with an antiseptic cloth and blood sample is transferred into tubes containing the correct preservatives then add your blood group available in your hospital to your blood bank.<br><br>
+        </div>
+          <input type="checkbox" name="condition" value="agree" required> Agree<br><br>          
           <input type="submit" name="add" value="Add" class="btn btn-primary btn-block"><br>
           <a href="hospitalpage.html" class="text-centre" >Cancel</a><br>
         </form>
@@ -78,13 +116,15 @@
   }
   ?>
     <div class="col-lg-4 col-md-5 col-sm-6 col-xs-7 mb-5">
-          <table class="table table-striped table-responsive">
-            <th colspan="4" class="title">Blood Bank</th>
+          <!-- <table class="table table-striped table-responsive"> -->
+          <table bgcolor="#2779a7">  
+          <th colspan="5" class="title">Blood Bank</th>
             <tr>
-              <th>#</th>
-
+              <th>Sr.No.</th>
               <th>Blood Samples</th>
-              <th>Action</th>
+              <th>Blood stock</th>
+              <th>Blood availability</th>                 
+              <th>Action</th>           
             </tr>
             <div>
                 <?php
@@ -98,8 +138,9 @@
             <?php while($row = mysqli_fetch_array($result)) { ?>
             <tr>
               <td><?php echo ++$counter; ?></td>
-
               <td><?php echo $row['bg'];?></td>
+              <td><?php echo $row['stock']; ?></td>
+              <td><?php echo $row['doa']; ?></td>
               <td><a href="file/delete.php?bid=<?php echo $row['bid'];?>" class="btn btn-danger">Delete</a></td>
             </tr>
             <?php } ?>

@@ -27,6 +27,41 @@ $result = mysqli_query ($conn, $sql);
     max-width: 450px;
     background-color: white;
 }
+/* Set table properties */
+table {
+  border-collapse: collapse;
+  border:1px solid black;
+  color:black;
+  width: 100%;
+  border-radius: 5px;
+  -moz-border-radius: 5px !important;
+  
+}
+
+/* Style table headers */
+th {
+  background-color:  #49c5b6;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  width:10%;
+  margin-bottom: 10px;
+}
+
+/* Style table rows */
+tr {
+  border: 1px solid #ddd;
+  width:10%;
+}
+
+/* Add hover effect on table rows */
+tr:hover {
+  background-color: #D14836;
+  color:white;
+  transform: scale(1.01);
+
+
+}
 </style>
 <body>
     <?php require 'header.php'; ?>
@@ -34,7 +69,7 @@ $result = mysqli_query ($conn, $sql);
         
         <?php require 'message.php'; ?>
         
-        <div class="row col-lg-8 col-md-8 col-sm-12 mb-3">
+        <div class="row col-lg-8 col-md-8 col-sm-12 mb-3" style="float:left;">
             <form method="get" action="" style="margin-top:-20px; ">
             <label class="font-weight-bolder">Select Blood Group:</label>
                <select name="search" class="form-control">
@@ -52,16 +87,18 @@ $result = mysqli_query ($conn, $sql);
                <input type="submit" name="submit" class="btn btn-info" value="search">
            </form>
         </div>
-
-        <table class="table table-responsive table-striped rounded mb-5">
-            <tr><th colspan="7" class="title">Available Blood Samples</th></tr>
+        <!-- <table class="table table-responsive table-striped rounded mb-5"> -->
+        <table bgcolor="#2779a7">    
+        <tr><th colspan="9" class="title">Available Blood Samples</th></tr>
             <tr>
-                <th>#</th>
+                <th>Sr.No.</th>
                 <th>Hospital Name</th>
                 <th>Hospital City</th>
                 <th>Hospital Email</th>
                 <th>Hospital Phone</th>
                 <th>Blood Group</th>
+                <th>Blood stock</th>
+                <th>Blood availability</th>                
                 <th>Action</th>
             </tr>
 
@@ -74,7 +111,7 @@ $result = mysqli_query ($conn, $sql);
             }
             ?>
             </div>
-
+ 
         <?php while($row = mysqli_fetch_array($result)) { ?>
 
             <tr>
@@ -84,15 +121,21 @@ $result = mysqli_query ($conn, $sql);
                 <td><?php echo ($row['hemail']); ?></td>
                 <td><?php echo ($row['hphone']); ?></td>
                 <td><?php echo ($row['bg']); ?></td>
-
+                <td><?php echo $row['stock']; ?></td>
+                <td><?php echo $row['doa']; ?></td>
                 <?php $bid= $row['bid'];?>
                 <?php $hid= $row['hid'];?>
-                <?php $bg= $row['bg'];?>
+                <?php $bg= $row['bg'];?>                
+                <?php $num= $row['stock'];?>                
+                <?php $date= $row['doa'];?>                 
                 <form action="file/request.php" method="post">
                     <input type="hidden" name="bid" value="<?php echo $bid; ?>">
                     <input type="hidden" name="hid" value="<?php echo $hid; ?>">
                     <input type="hidden" name="bg" value="<?php echo $bg; ?>">
-
+                    <input type="hidden" name="num" value="<?php echo $num; ?>">
+                    <input type="hidden" name="date" value="<?php echo $date; ?>">
+              
+                    
                 <?php if (isset($_SESSION['hid'])) { ?>
                 <td><a href="javascript:void(0);" class="btn btn-info hospital">Request Sample</a></td>
                 <?php } else {(isset($_SESSION['rid']))  ?>
@@ -102,7 +145,9 @@ $result = mysqli_query ($conn, $sql);
                 </form>
             </tr>
 
-        <?php } ?>
+        <?php }
+         ?>
+
         </table>
     </div>
     <?php require 'footer.php' ?>
